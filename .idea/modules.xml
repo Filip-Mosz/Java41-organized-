@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Java-Podstawy/Java-Podstawy.iml" filepath="$PROJECT_DIR$/Java-Podstawy/Java-Podstawy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java-Zaawansowana/Java-Zaawansowana.iml" filepath="$PROJECT_DIR$/Java-Zaawansowana/Java-Zaawansowana.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java41-organized-.iml" filepath="$PROJECT_DIR$/Java41-organized-.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zadania-Dodatkowe/Zadania-Dodatkowe.iml" filepath="$PROJECT_DIR$/Zadania-Dodatkowe/Zadania-Dodatkowe.iml" />
+    </modules>
+  </component>
+</project>
