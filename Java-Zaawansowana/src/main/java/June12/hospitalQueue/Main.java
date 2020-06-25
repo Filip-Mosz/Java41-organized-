@@ -1,7 +1,6 @@
 package June12.hospitalQueue;
 
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -35,13 +34,13 @@ public class Main {
                 a Co 2 sekundy aplikacja dodaje losową osobę (losujemy imię, nazwisko, chorobę z tablicy, jak bardzo zły - losujemy liczbę)
                 b Co 2 sekundy + random max 1s aplikacja przyjmuje pacjenta
 
-                todo tu skończyłem
+
             6. Zamiast przyjmować pacjentów w kolejności naturalnej przyjmuj ich według priorytetu:
                 a Metoda next powinna zwracać najpierw osoby o nazwisku “Kowalski” (to nazwisko ordynatora),
                    ** pomyśl w przyszłości o ładowaniu jej z pliku properties za pomocą klasy Properties
                 b w następnej kolejności powinna zwracać osoby z czymś poważnym (nazwa choroby "cos powaznego")
                 c dalej osoby, których iloczyn jakBardzoZly i zaraźliwość będzie wyższy
-
+todo 4*(brak pełnego opisu), 6b
 
          */
 
@@ -77,6 +76,7 @@ public class Main {
             System.out.println("\"nowy pacjent\" - zapisać kolejnego pacjenta");
             System.out.println("\"demo\" - uruchomić tryb demonstracyjny");
             System.out.println("\"losowy pacjent\" - stworzyć kilku losowych pacjentów");
+            System.out.println("\"priority test\" sprawdzić działanie priorytetowej wersji z kolejki");
             System.out.println("\"q\" - zakończyć działanie programu");
             option = new Scanner(System.in).nextLine();
 
@@ -126,9 +126,9 @@ public class Main {
                     Thread.sleep(2000);
                     if (LocalTime.now().isAfter(ifStart.plusSeconds(2))){
                         if (queue.length != 0) {
-                            System.out.println(LocalTime.now() + "Do gabinetu wchodzi \n" + queue.next());
+                            System.out.println(LocalTime.now() + " Do gabinetu wchodzi \n" + queue.next());
                         } else {
-                            System.out.println(LocalTime.now() + "Nie ma nikogo w kolejce.");
+                            System.out.println(LocalTime.now() + " Nie ma nikogo w kolejce.");
                         }
                     }
                     if (LocalTime.now().isAfter(ifStart.plusSeconds(2))){
@@ -138,14 +138,43 @@ public class Main {
                         System.out.println(LocalTime.now() + " Zapisuje sie nowy pacjent\n" + demoN.toString() + "\n");
                     }
 
-//                        System.out.println("wywołanie nr" + ++counter);
-//                        Thread.sleep(2000);
-//                    System.out.println(LocalTime.now());
-//                    System.out.println(end + "\n");
 
                 } while (!LocalTime.now().isAfter(end)); //boolean works
 
 
+            } else if ("priority test".equalsIgnoreCase(option)){
+                HospitalQueue_Priority szpital = new HospitalQueue_Priority();
+                HospitalQueue_Surname farsa = new HospitalQueue_Surname();
+                System.out.println("Program tu wchodzi");
+                Patient gruzlik = new Patient("Jan", "Kaszel", 4, "Tuberculosis");
+                Patient chytraBaba = new Patient("Grażyna", "Chwytak", 1, "Kleptomania");
+                Patient symulant = new Patient("Apolonia", "Sciema", 0, "healthy but lonely");
+                Patient wypadkowy = new Patient("Roman", "Wypadek", 10, "multiple bones fracture");
+                Patient znajomy = new Patient("Marian", "Kowalski", 1, "obesy");
+
+                szpital.add(gruzlik);
+                szpital.add(wypadkowy);
+                szpital.add(chytraBaba);
+                szpital.add(symulant);
+                //
+                farsa.add(gruzlik);
+                farsa.add(wypadkowy);
+                farsa.add(chytraBaba);
+                farsa.add(symulant);
+                farsa.add(znajomy);
+
+                System.out.println("Do kolejki wchodzi " + gruzlik);
+                System.out.println("Do kolejki wchodzi " + wypadkowy);
+                System.out.println("Do kolejki wchodzi " + chytraBaba);
+                System.out.println("Do kolejki wchodzi " + znajomy);
+                System.out.println("Do kolejki wchodzi " + symulant + "\n");
+
+
+                System.out.println("Najbardziej krytyczny pacjent: " + szpital.peek());
+                System.out.println("Znajomy ordynatora: " + farsa.peek());
+            } else {
+                System.out.println(option + " Nie znam tej komendy");
+                Thread.sleep(1500);
             }
         } while (!"q".equals(option));
     }
